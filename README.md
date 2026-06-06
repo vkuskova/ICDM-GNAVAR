@@ -85,7 +85,7 @@ artifact is traceable to the exact run that produced it.
 
 ---
 
-## Reproducibility notes (honest)
+## Reproducibility notes
 
 - **Exact vs. range checks are deliberate.** Recovery counts, parameter counts, rank
   orderings, and SPX-edge counts are stable and checked exactly. MSE values, cross-fit
