@@ -67,9 +67,36 @@ Every numerical claim in the paper, organized by section:
 Quantities that are stable under reseeding (recovery counts, parameter counts, rank
 orderings) are checked exactly or within a tight tolerance; seed- or hardware-sensitive
 quantities (held-out MSEs, cross-fit margins, seed-agreement fractions) are checked as
-ranges. For the WDI domain the check asserts disagreement between independent seeds, since
-non-recovery is the reported result. A per-claim cross-reference is in
-[`PAPER_TO_CODE_TRACEABILITY.md`](PAPER_TO_CODE_TRACEABILITY.md).
+ranges or as structural properties. For the WDI domain the check asserts disagreement
+between independent seeds, since non-recovery is the reported result.
+
+### Reproducible results table
+
+Every row is checked by `verify_paper_numbers.py` against the cited artifact (the listed
+paths are inside `gnavar-icdm-reproducibility.tar.gz`). A per-claim cross-reference to the
+exact check is in [`PAPER_TO_CODE_TRACEABILITY.md`](PAPER_TO_CODE_TRACEABILITY.md).
+
+| Paper claim | Value | Check | Source artifact |
+|---|---|---|---|
+| **Synthetic recovery vs. sample size** (§VI-A) | 0/5, 4/5, 5/5, 5/5 at T = 1k/5k/25k/100k | exact | `results/experiment1/results.csv` |
+| Gate L² error shrinks with T | g123 0.31→0.27, g145 0.29→0.15 | tol | `results/experiment1/results.csv` |
+| **Support-collapse transition** (§VI-B) | effective rank 3.00 → 1.54 as ρ→1 | tol + monotone | `results/experiment2/results.csv` |
+| Recovery vanishes at collapse | 0/10 seeds at ρ ∈ {0.99, 1.0} | exact | `results/experiment2/results.csv` |
+| **No interpretability tax** (§VI-C, Table II) | G-NAVAR = GA²M = MLP MSE ≈ 0.0106; additive ≈ 0.17 | tol | `results/experiment_gating_value/results.csv` |
+| Recovery under rich support | GA²M 15/15, G-NAVAR 12/15 | exact | `results/experiment_gating_value/results.csv` |
+| Competitors capacity-matched ≥ G-NAVAR | params 2065 / 2251 / 2833 | exact | `results/experiment_gating_value/results.csv` |
+| **Beijing — recoverable** (§VII) | Setup A r_eff > 4; TEMP rank-1 at 4/4 sites | range + exact | `results/experiment_beijing/` |
+| Beijing Setup B (low support) | r_eff < 3.02; expected modulator rank-1 at 0/4 | range + exact | `results/experiment_beijing/` |
+| Beijing forecasting | G-NAVAR wins MSE 6/8 | exact | `results/experiment_beijing/results.csv` |
+| **WDI — rich support, not recoverable** (§VII) | r_eff ≈ 4.47; two seeds **disagree** on top modulator | tol + structural | `results/experiment_wdi_resource_curse/results.csv` |
+| WDI no predictive gain | additive MSE ≤ G-NAVAR MSE (1.19 vs 1.26) | structural + tol | `results/experiment_wdi_resource_curse/results.csv` |
+| **Realized volatility — support collapse** (§VII, Table III) | r_eff < 2 at all 4 targets | exact | `results/experiment_rv/results.csv` |
+| RV confidently-arbitrary signature | 4 distinct top modulators; SPX #1 in 5/12 edges; seed agreement ≈ 0.44 | exact + tol | `results/experiment_rv/results.csv` |
+| RV margins deceptively large | 1.9× – 5.8× | range | `results/experiment_rv/results.csv` |
+
+The three real domains realize the three logical states the theory permits: recoverable
+(Beijing), rich support but not recoverable (WDI), and support collapse (realized
+volatility).
 
 ---
 
