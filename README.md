@@ -101,7 +101,7 @@ For verifying that the pipeline reproduces, not just that the numbers match the 
 artifacts, continue with path B in the notebook. If you haven't set the GPU for path A, do so now,
 but all artifacts in memory will be removed and you will need to re-upload the tarball.
 
-**Runtime** Approximately 22 minutes on Colab G4 GPU.
+**Runtime:** Approximately 22 minutes on Colab G4 GPU for all six experiments.
 
 The bundle's `notebooks/` folder has one notebook per experiment; each
 regenerates one `results/` subfolder on a GPU. The three synthetic experiments need no
