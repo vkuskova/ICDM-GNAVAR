@@ -29,6 +29,7 @@ bundle, surfaced for direct GitHub viewing, or this landing README.
 
 ---
 This bundle is designed to run in Colab to allow reviewers take advantage of free compute that Colab offers. 
+
 *Prefer a terminal? After extracting the tarball:*
 ```bash
 tar xzf gnavar-icdm-reproducibility.tar.gz
@@ -45,10 +46,7 @@ reported number from the committed result files and asserts each matches the pap
    [Google Colab](https://colab.research.google.com) (**File > Upload notebook**).
 3. If you plan to re-run the entire experiment (not just reproduce numbers), connect to GPU.
 4. Run cell 1 in path A; upload the tarball when prompted. Run cell 2 to reproduce paper numbers.
-
 The notebook unpacks the tarball and runs the audit. Expected output: `42/42 checks passed`.
-
-
 
 ### What the 42 checks cover
 
@@ -100,12 +98,12 @@ volatility).
 ## Regenerate the result files from scratch (optional, GPU)
 
 For verifying that the pipeline reproduces, not just that the numbers match the saved
-artifacts. The bundle's `notebooks/` folder has one notebook per experiment; each
+artifacts, continue with path B in the notebook. If you haven't set the GPU for path A, do so now,
+but all artifacts in memory will be removed and you will need to re-upload the tarball.
+
+The bundle's `notebooks/` folder has one notebook per experiment; each
 regenerates one `results/` subfolder on a GPU. The three synthetic experiments need no
-external data; the three real-data experiments need their dataset (public sources in
-`data/README.md`; the raw data are not redistributed). After regenerating, re-run the audit
-to re-check. See `BUNDLE_README.md` for step-by-step instructions and the
-notebook-to-folder map.
+external data; the three real-data experiments need their dataset (provided in the \data folder). 
 
 Re-running on different hardware reproduces the exact-checked quantities (recovery counts,
 parameter counts, rank orderings); seed- and hardware-sensitive quantities differ slightly
@@ -122,8 +120,7 @@ Regeneration path: additionally `torch` and `scikit-learn`.
 ## License
 
 - **Code**: MIT (see `LICENSE` inside the bundle).
-- **Datasets**: publicly available from their original sources, cited in the paper and in
-  `data/README.md`; raw data are not redistributed here.
+- **Datasets**: publicly available from their original sources, cited in the paper. Provided here for reproducibility purposes; should not be reused and reproduced without citing the original dataset sources.
 - **Paper**: ICDM submission; all rights reserved by the authors.
 
 ## Contact
