@@ -16,7 +16,7 @@ Check kinds
                 "two seeds disagree") -- used where the *finding itself* is instability,
                so a point value would be the wrong thing to assert.
 
-Design note on honesty
+Design notes
 -----------------------
 Quantities that are stable under reseeding are checked exactly or with a tight tolerance.
 Quantities that are seed- or hardware-sensitive are checked as ranges or as structural
