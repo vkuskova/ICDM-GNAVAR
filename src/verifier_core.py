@@ -16,7 +16,7 @@ Check kinds
                 "two seeds disagree") -- used where the *finding itself* is instability,
                so a point value would be the wrong thing to assert.
 
-Design notes
+Design note on honesty
 -----------------------
 Quantities that are stable under reseeding are checked exactly or with a tight tolerance.
 Quantities that are seed- or hardware-sensitive are checked as ranges or as structural
@@ -52,17 +52,17 @@ def syn_gate_err(root, T, col):
     df = _csv(root, "results/experiment1/results.csv")
     return float(df[df["T"] == T][col].mean())
 
-# --- Support-collapse rho-sweep (experiment2_v2) ----------------------------
+# --- Support-collapse rho-sweep (experiment2) ----------------------------
 def rho_reff(root, rho):
-    df = _csv(root, "results/experiment2_v2/results.csv")
+    df = _csv(root, "results/experiment2/results.csv")
     return float(df[np.isclose(df.rho, rho)].r_eff_x3_x5.mean())
 
 def rho_recovery(root, rho):
-    df = _csv(root, "results/experiment2_v2/results.csv")
+    df = _csv(root, "results/experiment2/results.csv")
     return int(df[np.isclose(df.rho, rho)].modulator_correct_both.sum())
 
 def rho_reff_monotone(root):
-    df = _csv(root, "results/experiment2_v2/results.csv")
+    df = _csv(root, "results/experiment2/results.csv")
     m = df.groupby("rho").r_eff_x3_x5.mean()
     return bool(np.all(np.diff(m.values) < 0))  # strictly decreasing in rho
 
