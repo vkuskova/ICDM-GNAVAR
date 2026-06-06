@@ -15,7 +15,7 @@ a fresh Colab (clones this repo), or a local clone. No edits required.
 | `experiment_rv.ipynb` | `results/experiment_rv/` — realized volatility (§VII) | `data/rv_dataset.csv` |
 | `experiment_wdi_resource_curse.ipynb` | `results/experiment_wdi_resource_curse/` — WDI (§VII) | `data/wdi_reversal_panel.csv` |
 
-## Notes (honest)
+## Notes
 - **These are the notebooks as run to produce the committed artifacts.** They require a GPU
   (Colab T4/A100 is sufficient) and, for the three real-data experiments, the raw dataset placed
   in `data/` (not redistributed here — see `data/README.md` for public sources). The three

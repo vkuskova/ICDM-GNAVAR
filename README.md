@@ -1,4 +1,4 @@
-# When Are Neural Interaction Discoveries Real? Reproducibility Bundle
+# When Are Neural Interaction Discoveries Real? — Reproducibility Bundle
 
 Reproducibility bundle for the ICDM 2026 submission *"When Are Neural Interaction
 Discoveries Real? Identifiability, Recoverability, and a Pre-Fit Diagnostic."*
@@ -19,13 +19,28 @@ datasets, no Python install, no terminal; it finishes in well under a minute.
 click **Download** on this page, upload the zip into the Colab session, and re-run the
 first cell. Everything else is unchanged.)*
 
-### Re-training from scratch (optional, GPU)
+### Re-running the experiments from scratch (optional, GPU)
 
-Not needed to verify the paper. The `notebooks/` folder has one notebook per experiment
-that regenerates its result file on a GPU; `notebooks/README.md` maps each to its output
-folder and lists the public dataset it uses. After regenerating, run `RUN_ME.ipynb` again
-to re-check. (Re-runs match the exact-checked quantities; seed-sensitive quantities are
-checked as ranges and may shift slightly with seed/hardware.)
+This regenerates the result files rather than verifying the committed ones, and is not
+needed to check the paper's numbers. Each notebook in `notebooks/` reproduces exactly one
+`results/` subfolder. To re-run one in Colab:
+
+1. Download the notebook you want from `notebooks/` (the mapping from notebook to result
+   folder and required dataset is in `notebooks/README.md`).
+2. In [Colab](https://colab.research.google.com), **File > Upload notebook**, choose it.
+3. Set a GPU runtime: **Runtime > Change runtime type > GPU**.
+4. The three synthetic experiments (`experiment1`, `experiment2`, `experiment_gating_value`)
+   need no data; run them directly. The three real-data experiments
+   (`experiment_beijing`, `experiment_rv`, `experiment_wdi_resource_curse`) need their
+   dataset placed where the notebook's first cell expects it; the cell prints that path,
+   and the public source for each dataset is listed in `data/README.md`.
+5. **Runtime > Run all.** The notebook writes its output to `results/<that experiment>/`.
+6. To confirm the regenerated files still match the paper, run `RUN_ME.ipynb` again.
+
+Re-runs reproduce the exact-checked quantities (recovery counts, parameter counts, rank
+orderings). Seed- and hardware-sensitive quantities (held-out MSEs, cross-fit margins,
+seed-agreement fractions) are verified as ranges and may differ slightly from the committed
+values; each `results/<folder>/metadata.json` records the original run environment.
 
 ---
 
@@ -91,7 +106,7 @@ artifact is traceable to the exact run that produced it.
 
 ---
 
-## Reproducibility notes 
+## Reproducibility notes
 
 - **Exact vs. range checks are deliberate.** Recovery counts, parameter counts, rank
   orderings, and SPX-edge counts are stable and checked exactly. MSE values, cross-fit
