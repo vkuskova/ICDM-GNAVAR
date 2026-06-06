@@ -1,4 +1,4 @@
-# When Are Neural Interaction Discoveries Real? — Reproducibility Bundle
+# When Are Neural Interaction Discoveries Real? Reproducibility Bundle
 
 Reproducibility bundle for the ICDM 2026 submission *"When Are Neural Interaction
 Discoveries Real? Identifiability, Recoverability, and a Pre-Fit Diagnostic."*
