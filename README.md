@@ -1,9 +1,6 @@
 # ICDM 2026 Submission — Reproducibility Repository
 
-This repository contains the reproducibility package for:
-
-> **When Are Neural Interaction Discoveries Real? Identifiability, Recoverability,
-> and a Pre-Fit Diagnostic** — Anonymous (ICDM 2026 submission)
+Reproducibility bundle for the ICDM 2026 submission "When Are Neural Interaction Discoveries Real? Identifiability, Recoverability, and a Pre-Fit Diagnostic."
 
 The paper studies when a neural model's discovered pairwise interactions are
 identifiable and recoverable, introduces a pre-fit effective-rank diagnostic and a
@@ -31,7 +28,13 @@ Everything else at the repository root is either a copy of a file from inside th
 bundle, surfaced for direct GitHub viewing, or this landing README.
 
 ---
-
+This bundle is designed to run in Colab to allow reviewers take advantage of free compute that Colab offers. 
+*Prefer a terminal? After extracting the tarball:*
+```bash
+tar xzf gnavar-icdm-reproducibility.tar.gz
+pip install -r requirements.txt      # numpy + pandas
+python verify_paper_numbers.py       # prints 42/42 checks passed
+```
 ## Reproduce every number in the paper (Colab, no setup)
 
 The fastest path. **No training, no GPU, no datasets, ~30 seconds.** It recomputes every
@@ -40,18 +43,12 @@ reported number from the committed result files and asserts each matches the pap
 1. Download **`gnavar-icdm-reproducibility.tar.gz`** from this repository.
 2. Open the notebook **`ICDM2026_GNAVAR_pipeline.ipynb`** in
    [Google Colab](https://colab.research.google.com) (**File > Upload notebook**).
-3. Upload the tarball into the Colab session: **Files** panel (folder icon, left) **> Upload**.
-4. **Runtime > Run all.**
+3. If you plan to re-run the entire experiment (not just reproduce numbers), connect to GPU.
+4. Run cell 1 in path A; upload the tarball when prompted. Run cell 2 to reproduce paper numbers.
 
 The notebook unpacks the tarball and runs the audit. Expected output: `42/42 checks passed`.
 
-*Prefer a terminal? After extracting the tarball:*
 
-```bash
-tar xzf gnavar-icdm-reproducibility.tar.gz
-pip install -r requirements.txt      # numpy + pandas
-python verify_paper_numbers.py       # prints 42/42 checks passed
-```
 
 ### What the 42 checks cover
 
