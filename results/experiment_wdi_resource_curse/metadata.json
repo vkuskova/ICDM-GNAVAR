@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-06-05T18:23:15.986576+00:00",
+  "experiment": "wdi_resource_curse",
+  "data_sha256": "2ca1aec61ba7a3ea099c51a725682a6aa1c18da1baf91cb91b185496079d8deb",
+  "gnavar_core_sha256": "405a5804783fd3af1d86300024ad5ea99950fc9cc1711d75ae57638482637f7c",
+  "target": "gdp_growth",
+  "edge": "resource_rents",
+  "sources": [
+    "resource_rents",
+    "investment",
+    "trade_openness",
+    "fdi"
+  ],
+  "predicted_modulator": "investment",
+  "competitor": "trade_openness",
+  "note": "rich-support real domain (r_eff 4.72/5 pre-screen); pre-committed conditional-resource-curse edge; levels"
+}

@@ -1,0 +1,19 @@
+WDI resource-curse: resource_rents -> gdp_growth
+================================================
+source-support r_eff=4.47/4 (rich; diagnostic predicts recovery feasible)
+n_train=6171, n_test=1374
+
+PRE-COMMITTED prediction: investment ranks #1, seed-stable. (competitor: trade_openness)
+
+seed0 top=investment: investment=0.1794, trade_openness=0.1246, fdi=0.0479
+seed1 top=trade_openness: trade_openness=0.0864, fdi=0.0575, investment=0.0217
+seed agreement: False
+gate slopes seed0: {'investment': -0.3978363275527954, 'trade_openness': -0.6319583654403687, 'fdi': -0.2181084156036377}
+gate slopes seed1: {'investment': -0.027054309844970703, 'trade_openness': 0.24831640720367432, 'fdi': 0.22894680500030518}
+MSE: G-NAVAR=1.2586  additive=1.1940  (ratio add/gn=0.949)
+
+OUTCOME READING:
+  (1) seed_agree=True & top=investment & gates non-trivial -> clean second positive (predicted)
+  (2) seed_agree=True & top=trade_openness -> resource-curse via openness, reported as competitor win
+  (3) seed_agree=True but ratio~1.0 & flat gates -> rich support, weak interaction (identifiability != existence)
+  (4) seed_agree=False -> unstable despite rich support (surprising tension)

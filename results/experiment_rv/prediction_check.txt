@@ -1,0 +1,55 @@
+Realized Volatility: diagnostic-validation verdict
+======================================================================
+Pre-committed prediction: r_eff < 2 for all targets implies modulator
+recovery will be UNRELIABLE. We test 4 specific consequences.
+
+Effective rank per target (all predicted < 2.0):
+  FTSE     r_eff = 1.499  (below cliff)
+  GDAXI    r_eff = 1.486  (below cliff)
+  N225     r_eff = 1.775  (marginal)
+  HSI      r_eff = 1.973  (marginal)
+
+PREDICTION 1: SPX does not consistently dominate as modulator.
+  FTSE     SPX ranked #1 in 2/3 peer edges
+  GDAXI    SPX ranked #1 in 1/3 peer edges
+  N225     SPX ranked #1 in 1/3 peer edges
+  HSI      SPX ranked #1 in 1/3 peer edges
+  TOTAL: SPX #1 in 5/12 peer edges across all targets
+  => Prediction HOLDS: SPX is not the consistent dominant modulator
+
+PREDICTION 2: the top modulator varies target-to-target.
+  FTSE     most common top modulator: .SPX
+  GDAXI    most common top modulator: .FCHI
+  N225     most common top modulator: .HSI
+  HSI      most common top modulator: .FTSE
+  Distinct top modulators across 4 targets: 4
+  => Prediction HOLDS: top modulator varies across targets
+
+PREDICTION 3: top-modulator margins are small (~1x), vs Beijing 2-59x.
+  FTSE     mean top-modulator margin: 5.54x
+  GDAXI    mean top-modulator margin: 1.95x
+  N225     mean top-modulator margin: 5.84x
+  HSI      mean top-modulator margin: 4.82x
+  Mean margin across targets: 4.53x
+  => Prediction FAILS: margins are large (Beijing Setup A was 2.0-59.3x)
+
+PREDICTION 4: independent seeds disagree on top modulator (instability).
+  FTSE     seed agreement on top modulator: 0.50
+  GDAXI    seed agreement on top modulator: 0.25
+  N225     seed agreement on top modulator: 0.25
+  HSI      seed agreement on top modulator: 0.75
+  Mean seed agreement: 0.44 (1.0 = perfect agreement)
+  => Prediction HOLDS: seeds disagree (instability present)
+
+Forecast MSE (G-NAVAR seed0 vs Pairwise):
+  FTSE     Gn=0.3934  Pw=0.3949  ratio=1.00x
+  GDAXI    Gn=0.3682  Pw=0.3628  ratio=0.99x
+  N225     Gn=0.7220  Pw=0.6846  ratio=0.95x
+  HSI      Gn=0.4991  Pw=0.4663  ratio=0.93x
+  G-NAVAR wins on MSE: 1/4
+
+======================================================================
+OVERALL: 3/4 predictions hold.
+The diagnostic CORRECTLY flagged RV as a case where modulator
+recovery is unreliable. This validates its discriminating power:
+high r_eff (Beijing) -> clean recovery; low r_eff (RV) -> unreliable.
