@@ -3,81 +3,29 @@
 Reproducibility bundle for the ICDM 2026 submission *"When Are Neural Interaction
 Discoveries Real? Identifiability, Recoverability, and a Pre-Fit Diagnostic."*
 
-There are two ways to reproduce the results. **Path A verifies every number in the
-paper in about 30 seconds on any laptop (no GPU).** Path B regenerates the underlying
-result files from scratch on a GPU. Most reviewers will only need Path A.
+## Reproduce every number in the paper (one notebook, no setup)
 
----
+1. Download **`RUN_ME.ipynb`** from this repository (open it, then click **Download** / **Raw**).
+2. Open it in Google Colab: [colab.research.google.com](https://colab.research.google.com) >
+   **File > Upload notebook** > choose `RUN_ME.ipynb`.
+3. Click **Runtime > Run all**.
 
-## Path A — verify every paper number (no GPU, ~30 seconds)
+That is the whole procedure. The notebook downloads the code and result files
+automatically, recomputes every reported number from the committed result files, and
+prints a `PASS`/`FAIL` line per claim, ending with `42/42 checks passed`. No GPU, no
+datasets, no Python install, no terminal; it finishes in well under a minute.
 
-This recomputes each numerical claim in the paper from the committed result files in
-`results/` and checks it against the value stated in the paper.
+*(If the automatic download is ever blocked, the notebook prints a one-line fallback:
+click **Download** on this page, upload the zip into the Colab session, and re-run the
+first cell. Everything else is unchanged.)*
 
-**Step 1.** Download this repository. On the Anonymous GitHub page, click **Download**
-(or **ZIP**) at the top right, and unzip it. You now have a folder containing
-`verify_paper_numbers.py`, `src/`, `results/`, etc.
+### Re-training from scratch (optional, GPU)
 
-**Step 2.** Open a terminal in that folder and run:
-
-```bash
-pip install -r requirements.txt      # installs numpy + pandas only
-python verify_paper_numbers.py
-```
-
-**Step 3.** Read the output. The script prints one `[PASS]`/`[FAIL]` line per claim and
-ends with a summary. A correct run prints:
-
-```
-RESULT: 42/42 checks passed.
-All paper numbers reproduce from the committed artifacts.
-```
-
-and exits with code 0. If any check fails, the script exits non-zero and lists the
-failures. Nothing else is required — no GPU, no datasets, no training.
-
----
-
-## Path B — regenerate the result files from scratch (GPU)
-
-Path B re-runs the experiments that produced the files in `results/`. It needs a GPU.
-The three synthetic experiments need no external data; the three real-data experiments
-need their dataset placed in `data/` (sources listed in `data/README.md`; the raw data
-are not redistributed here).
-
-**Option B1 — Google Colab (free GPU, recommended for Path B):**
-
-1. Download and unzip this repository (as in Path A, Step 1).
-2. Go to [colab.research.google.com](https://colab.research.google.com), choose
-   **File > Upload notebook**, and upload one notebook from the `notebooks/` folder
-   (e.g. `experiment1.ipynb`).
-3. Also upload the supporting files when prompted by the first cell, **or** the simplest
-   route: zip the unzipped repo folder, upload it to your Colab session
-   (`Files` pane > upload), unzip it in a cell with `!unzip yourbundle.zip`, then
-   `cd` into it. The first ("bootstrap") cell of each notebook resolves paths
-   automatically once the repo folder is present in the session.
-4. Set the runtime to GPU (**Runtime > Change runtime type > GPU**) and choose
-   **Runtime > Run all**.
-5. The notebook writes its output to `results/<that experiment>/`. To confirm the
-   regenerated files still match the paper, re-run Path A (`python verify_paper_numbers.py`).
-
-**Option B2 — local machine with a GPU:**
-
-```bash
-pip install -r requirements.txt
-pip install torch scikit-learn jupyter     # Path B extras
-jupyter notebook                            # open and run any notebooks/<experiment>.ipynb
-python verify_paper_numbers.py              # re-verify after regenerating
-```
-
-Each notebook maps to exactly one `results/` subfolder; see `notebooks/README.md` for the
-table and which dataset each real-data notebook needs.
-
-> **Note on Path B reproducibility.** Re-running will not bit-for-bit reproduce the committed
-> CSVs: seed- and hardware-sensitive quantities (MSEs, cross-fit margins, seed-agreement
-> fractions) shift slightly and are checked by Path A as ranges, while exact-checked
-> quantities (recovery counts, parameter counts, rank orderings) match. Each
-> `results/<folder>/metadata.json` records the original environment.
+Not needed to verify the paper. The `notebooks/` folder has one notebook per experiment
+that regenerates its result file on a GPU; `notebooks/README.md` maps each to its output
+folder and lists the public dataset it uses. After regenerating, run `RUN_ME.ipynb` again
+to re-check. (Re-runs match the exact-checked quantities; seed-sensitive quantities are
+checked as ranges and may shift slightly with seed/hardware.)
 
 ---
 
