@@ -1,23 +1,21 @@
-# When Are Neural Interaction Discoveries Real? — Reproducibility Bundle
+# When Are Neural Interaction Discoveries Real? Reproducibility Bundle
 
 Reproducibility bundle for the ICDM 2026 submission *"When Are Neural Interaction
 Discoveries Real? Identifiability, Recoverability, and a Pre-Fit Diagnostic."*
 
 ## Reproduce every number in the paper (one notebook, no setup)
 
-1. Download **`RUN_ME.ipynb`** from this repository (open it, then click **Download** / **Raw**).
+1. Download **`ICDM2026_GNAVAR_pipeline.ipynb`** from this repository (open it, then click **Download** / **Raw**).
 2. Open it in Google Colab: [colab.research.google.com](https://colab.research.google.com) >
    **File > Upload notebook** > choose `RUN_ME.ipynb`.
-3. Click **Runtime > Run all**.
+3. Download gnavar-icdm-reproducibility.tar.gz.
+4. If running number verification only, no additional setup is required. If planning to re-run all experiments, connect to GPU.
+5. Run the first cell, upload the tarball when prompted.
+6. Run the second cell, verify numbers.
 
-That is the whole procedure. The notebook downloads the code and result files
-automatically, recomputes every reported number from the committed result files, and
+That is the whole procedure. The notebook extracts contents of the tarball into \Contents directory, recomputes every reported number from the committed result files, and
 prints a `PASS`/`FAIL` line per claim, ending with `42/42 checks passed`. No GPU, no
 datasets, no Python install, no terminal; it finishes in well under a minute.
-
-*(If the automatic download is ever blocked, the notebook prints a one-line fallback:
-click **Download** on this page, upload the zip into the Colab session, and re-run the
-first cell. Everything else is unchanged.)*
 
 ### Re-running the experiments from scratch (optional, GPU)
 
@@ -25,17 +23,10 @@ This regenerates the result files rather than verifying the committed ones, and 
 needed to check the paper's numbers. Each notebook in `notebooks/` reproduces exactly one
 `results/` subfolder. To re-run one in Colab:
 
-1. Download the notebook you want from `notebooks/` (the mapping from notebook to result
-   folder and required dataset is in `notebooks/README.md`).
-2. In [Colab](https://colab.research.google.com), **File > Upload notebook**, choose it.
-3. Set a GPU runtime: **Runtime > Change runtime type > GPU**.
-4. The three synthetic experiments (`experiment1`, `experiment2`, `experiment_gating_value`)
-   need no data; run them directly. The three real-data experiments
-   (`experiment_beijing`, `experiment_rv`, `experiment_wdi_resource_curse`) need their
-   dataset placed where the notebook's first cell expects it; the cell prints that path,
-   and the public source for each dataset is listed in `data/README.md`.
-5. **Runtime > Run all.** The notebook writes its output to `results/<that experiment>/`.
-6. To confirm the regenerated files still match the paper, run `RUN_ME.ipynb` again.
+1. Set a GPU runtime: **Runtime > Change runtime type > GPU**.
+2. **Runtime > Run all.** Upload the tarball, reproducibility cells run automatically before experiments.
+3. The notebook writes its output to `results/<that experiment>/`.
+4. To confirm the regenerated files still match the paper, run cell 2 in Path A again.
 
 Re-runs reproduce the exact-checked quantities (recovery counts, parameter counts, rank
 orderings). Seed- and hardware-sensitive quantities (held-out MSEs, cross-fit margins,
