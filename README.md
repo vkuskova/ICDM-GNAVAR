@@ -12,7 +12,6 @@ real domains (Beijing air quality, realized volatility, WDI development indicato
 ## What's in this repository
 
 ```
-.
 ├── README.md                            ← this file (landing page)
 ├── ICDM2026_GNAVAR_pipeline.ipynb       ← Colab notebook: upload the tarball, follow the instructions
 ├── verify_paper_numbers.py              ← audit script (Path A entry point)
