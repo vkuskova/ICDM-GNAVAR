@@ -14,12 +14,11 @@ real domains (Beijing air quality, realized volatility, WDI development indicato
 ```
 .
 ├── README.md                            ← this file (landing page)
-├── ICDM2026_GNAVAR_pipeline.ipynb       ← Colab notebook: upload the tarball, Run all
+├── ICDM2026_GNAVAR_pipeline.ipynb       ← Colab notebook: upload the tarball, follow the instructions
 ├── verify_paper_numbers.py              ← audit script (Path A entry point)
 ├── verifier_core.py                     ← the CHECKS list (surfaced for direct viewing)
 ├── requirements.txt                     ← dependencies for the audit (numpy, pandas)
 ├── PAPER_TO_CODE_TRACEABILITY.md        ← every paper claim → check → source artifact
-├── BUNDLE_README.md                     ← detailed README from inside the bundle
 └── gnavar-icdm-reproducibility.tar.gz   ← the full reproducibility bundle (~0.5 MB)
 ```
 
