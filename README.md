@@ -71,6 +71,11 @@ Every row is checked by `verify_paper_numbers.py` against the cited artifact (th
 paths are inside `gnavar-icdm-reproducibility.tar.gz`). A per-claim cross-reference to the
 exact check is in [`PAPER_TO_CODE_TRACEABILITY.md`](PAPER_TO_CODE_TRACEABILITY.md).
 
+Each `results/<experiment>/` folder contains the canonical `results.csv` (plus
+`recovery.csv` / `triv_score_rankings.csv` where relevant) and a `metadata.json`
+recording the code SHA-256, data SHA-256, library versions, and hardware, so each
+artifact is traceable to the exact run that produced it.
+
 | Paper claim | Value | Check | Source artifact |
 |---|---|---|---|
 | **Synthetic recovery vs. sample size** (§VI-A) | 0/5, 4/5, 5/5, 5/5 at T = 1k/5k/25k/100k | exact | `results/experiment1/results.csv` |
@@ -111,6 +116,24 @@ Re-running on different hardware reproduces the exact-checked quantities (recove
 parameter counts, rank orderings); seed- and hardware-sensitive quantities differ slightly
 and are verified as ranges. Each `results/<folder>/metadata.json` records the original
 run environment.
+
+---
+
+## Reproducibility notes
+
+- **Exact vs. range checks are deliberate.** Recovery counts, parameter counts, rank
+  orderings, and SPX-edge counts are stable and checked exactly. MSE values, cross-fit
+  margins, and seed-agreement fractions vary with seed and hardware and are checked as
+  ranges or tolerances. The WDI checks assert that two seeds **disagree** — non-recovery
+  is the reported finding, so a point value would be the wrong thing to verify.
+- **Seed sensitivity is a result, not noise.** The realized-volatility and WDI domains
+  are reported precisely because their recovered structure is *not* stable across seeds;
+  the two-seed stability check in the paper is what detects this.
+- **Path B will not bit-reproduce Path A.** Regenerating artifacts on different
+  hardware/library versions shifts the seed-sensitive quantities slightly (within the
+  checked ranges); the exact-checked quantities should match. See each `metadata.json`
+  for the original environment.
+- **Raw third-party data are not redistributed**; see `data/README.md` for public sources.
 
 ---
 
